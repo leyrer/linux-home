@@ -1,5 +1,5 @@
 " Loeschen eventuell vorhandener Autocommands
-autocmd! 
+"autocmd! 
 
 set nocompatible
 behave mswin
@@ -16,8 +16,11 @@ set autoindent
 
 " Farbschema
 set background=dark
+"colorscheme materialtheme
+" colorscheme PlasticCodeWrap
 colorscheme solarized
 
+"
 " Switch syntax highlighting on, when the terminal has colors
 if &t_Co > 2 || has("gui_running")
   syntax on
@@ -38,13 +41,24 @@ set scrolloff=10
 
 " Zeilennummern anzeigen
 set nu 
+set relativenumber
+" relativenumber = instead of showing you what line in the file a given line
+" is at, it shows you how far from the current line a given line is at.  
+" What i did here is set both of the options to be true which gives us what 
+" Vim calls hybrid line numbers.  This shows the current line’s line number
+" and the relative number for the rest.
+" Source: https://hackr.pl/2017/01/11/some-of-my-favorite-vimrc-edits/
+
+" keep the current line in the vertical center of the editor.
+set so=999
+" Source: https://hackr.pl/2017/01/11/some-of-my-favorite-vimrc-edits/
+
+set colorcolumn=80
 
 if has("multi_byte")
-    set encoding=utf-8
+	set encoding=utf-8
     setglobal fileencoding=utf-8
-    " set bomb
-" set termencoding=utf-8,iso-8859-15
-" set fileencodings=utf-8,iso-8859-15
+    "set bomb
     set termencoding=utf-8
     set fileencodings=utf-8
 else
@@ -59,6 +73,7 @@ set autoindent		" always set autoindenting on
 filetype on
 filetype indent on
 filetype plugin on 
+filetype plugin indent on    " enable loading indent file for filetype
 
 " Inkrementelle Suche
 set incsearch
@@ -85,10 +100,11 @@ if has("win32")
 	let winhelpfile='windows.hlp'
 	map K :execute "!start winhlp32 -k <cword> " . winhelpfile <CR>
 else
-	set bdir=$HOME/tmp
-	set dir=$HOME/tmp
+	set bdir=/home/leyer/tmp
+	set dir=/home/leyrer/tmp
+	set backupdir=/home/leyrer/tmp
 	set nobackup
-	set writebackup
+	"set writebackup
 	set guifont=DejaVu\ Sans\ Mono\ 12
 endif
 
@@ -96,6 +112,14 @@ set diffopt=horizontal
 "set cursorline
 "set cursorcolumn
 set spelllang=de_at,en
+
+" Settings for gvim can also be placed in the vimrc file using a has('gui_running') check
+if has('gui_running')
+	" CTRL-Shift-V and SHIFT-Insert are Paste
+	map <C-S-V>     "+gP
+	map <S-Insert>  "+gP
+endif
+
 
 " ======================================================================
 " For blogging
@@ -266,7 +290,7 @@ if has('statusline')
     set statusline+=%{ShowUtf8Sequence()}\         " utf-8 sequence
     set statusline+=%#User1#                       " highlighting
     set statusline+=U+%04B\                        " Unicode char under cursor
-	set statusline+=§wc:%{WordCount()},  
+	set statusline+=wc:%{WordCount()},  
     set statusline+=%-6.(%l/%{line('$')},%c%V%)\ %<%P           " position
 
     " Use different colors for statusline in current and non-current window.
@@ -288,5 +312,40 @@ endif
 
 set laststatus=2
 
-filetype plugin indent on
+" http://vim.wikia.com/wiki/Reverse_letters
+" Simply enable visual mode (v), highlight the characters you want inverted, and hit \is. 
+vnoremap <silent> <Leader>is :<C-U>let old_reg_a=@a<CR>
+ \:let old_reg=@"<CR>
+ \gv"ay
+ \:let @a=substitute(@a, '.\(.*\)\@=',
+ \ '\=@a[strlen(submatch(1))]', 'g')<CR>
+ \gvc<C-R>a<Esc>
+ \:let @a=old_reg_a<CR>
+ \:let @"=old_reg<CR>
 
+
+" https://github.com/junegunn/fzf
+" If installed using git
+set rtp+=~/.fzf
+
+" vim-plug
+" :PlugInstall to install plugins.
+call plug#begin('~/.vim/plugged')
+Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf.vim'
+Plug 'junegunn/goyo.vim'
+" Initialize plugin system
+call plug#end()
+
+" https://superuser.com/questions/10588/how-to-make-cut-copy-paste-in-gvim-on-ubuntu-work-with-ctrlx-ctrlc-ctrlv#10604
+vmap <C-c> "+yi
+vmap <C-x> "+c
+vmap <C-v> c<ESC>"+p
+imap <C-v> <C-r><C-o>+
+
+" habit breaking
+" via https://github.com/wondratsch/linux_home/blob/master/.vimrc
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
