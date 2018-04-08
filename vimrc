@@ -1,4 +1,4 @@
-" Loeschen eventuell vorhandener Autocommands
+" Delete potential autocommands, that are active
 "autocmd! 
 
 set nocompatible
@@ -6,40 +6,30 @@ behave mswin
 set selectmode=mouse
 set tabstop=4
 
-" Indent von 3 Zeichen, diese werden beibehalten
+" I want an intend of four characters
 set shiftwidth=4
 set shiftround
 set autoindent 
 
-" Cursorposition anzeigen
-"set ruler
-
-" Farbschema
+" colour scheme
 set background=dark
-"colorscheme materialtheme
-" colorscheme PlasticCodeWrap
 colorscheme solarized
 
-"
 " Switch syntax highlighting on, when the terminal has colors
 if &t_Co > 2 || has("gui_running")
   syntax on
 endif
 
-" Kommandohistory auf 50 Zeilen setzen
+" Increase command history size
 set history=4000
 
-" Commandline Completion mit <Tab>
+" Commandline Completion with <Tab>
 set wildmode=list:longest,full
 
-" Aktuellen Modus anzeigen
-"set showmode
-"set showcmd 
-
-"Kontext rund um den Cursor anzeigen
+" Show context around cursor
 set scrolloff=10
 
-" Zeilennummern anzeigen
+" show usefull line numbers with distance for dd, yy, ...
 set nu 
 set relativenumber
 " relativenumber = instead of showing you what line in the file a given line
@@ -62,24 +52,23 @@ if has("multi_byte")
     set termencoding=utf-8
     set fileencodings=utf-8
 else
-  echoerr "Diese Version von Vim wurde nicht mit +multi_byte kompiliert!"
+  echoerr "Vim not compiled with multi-byte support!"
 endif 
 
 " allow backspacing over everything in insert mode
 set backspace=1
 set autoindent		" always set autoindenting on
 
-" Aktivieren der Dateityperkennung
+" Active file type recognition
 filetype on
 filetype indent on
 filetype plugin on 
 filetype plugin indent on    " enable loading indent file for filetype
 
-" Inkrementelle Suche
+" incremential search
 set incsearch
 
-" Suche ist nicht case-sensitiv, ausser der Begriff beinhaltet
-" Grossbuchstaben
+" make search case insensitive unless it includes upper case letters
 set ignorecase
 set smartcase 
 
@@ -104,26 +93,18 @@ else
 	set dir=/home/leyrer/tmp
 	set backupdir=/home/leyrer/tmp
 	set nobackup
-	"set writebackup
+	" https://dejavu-fonts.github.io/
 	set guifont=DejaVu\ Sans\ Mono\ 12
 endif
 
 set diffopt=horizontal
-"set cursorline
-"set cursorcolumn
-set spelllang=de_at,en
 
-" Settings for gvim can also be placed in the vimrc file using a has('gui_running') check
-if has('gui_running')
-	" CTRL-Shift-V and SHIFT-Insert are Paste
-	map <C-S-V>     "+gP
-	map <S-Insert>  "+gP
-endif
+set spelllang=de_at,en
 
 
 " ======================================================================
 " For blogging
-" Fladert from: http://www.vmunix.com/vim/source/html.vim (Sven Guckes)
+" from: http://www.vmunix.com/vim/source/html.vim (Sven Guckes)
 " insert "generic link"
   iab  Yhref <a href="" title=""></a><ESC>?""<CR>a
   vmap ,href "zdi<a href="" title="<C-R>z"><C-R>z</a><ESC>F"i
@@ -161,9 +142,8 @@ map <silent> <c-h> :call HtmlEscape()<CR>
 map <silent> <c-u> :call HtmlUnEscape()<CR>
 
 
-
 " ======================================================================
-" FOLDING FUER PERL
+" FOLDING for PERL
 let perl_fold=1 
 
 fun! Pretty ()
@@ -323,12 +303,12 @@ vnoremap <silent> <Leader>is :<C-U>let old_reg_a=@a<CR>
  \:let @a=old_reg_a<CR>
  \:let @"=old_reg<CR>
 
-
 " https://github.com/junegunn/fzf
 " If installed using git
 set rtp+=~/.fzf
 
 " vim-plug
+" https://github.com/junegunn/vim-plug
 " :PlugInstall to install plugins.
 call plug#begin('~/.vim/plugged')
 Plug '/usr/local/opt/fzf'
@@ -338,10 +318,17 @@ Plug 'junegunn/goyo.vim'
 call plug#end()
 
 " https://superuser.com/questions/10588/how-to-make-cut-copy-paste-in-gvim-on-ubuntu-work-with-ctrlx-ctrlc-ctrlv#10604
-vmap <C-c> "+yi
-vmap <C-x> "+c
-vmap <C-v> c<ESC>"+p
-imap <C-v> <C-r><C-o>+
+"vmap <C-c> "+yi
+"vmap <C-x> "+c
+"vmap <C-v> c<ESC>"+p
+"imap <C-v> <C-r><C-o>+
+
+" Settings for gvim can also be placed in the vimrc file using a has('gui_running') check
+if has('gui_running')
+	" CTRL-Shift-V and SHIFT-Insert are Paste
+	map <C-S-V>     "+gP
+	map <S-Insert>  "+gP
+endif
 
 " habit breaking
 " via https://github.com/wondratsch/linux_home/blob/master/.vimrc
@@ -349,3 +336,5 @@ noremap <Up> <NOP>
 noremap <Down> <NOP>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
+
+
