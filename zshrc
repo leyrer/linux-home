@@ -57,8 +57,7 @@ BULLETTRAIN_PROMPT_ADD_NEWLINE=true
 plugins=(git colored-man-pages command-not-found common-aliases copydir copyfile cp debian dircycle dirhistory dirpersist emoji-clock emoji gitfast gnu-util history-substring-search history iwhois man nmap rand-quote rsync ssh-agent sudo tmux web-search zsh-syntax-highlighting timewarrior)
 
 # User configuration
-
-export PATH="/home/leyrer/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/jvm/java-8-oracle/bin:/usr/lib/jvm/java-8-oracle/db/bin:/usr/lib/jvm/java-8-oracle/jre/bin"
+export PATH="/home/leyrer/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -91,7 +90,6 @@ source $ZSH/oh-my-zsh.sh
 # gpg2 parameter auto completion
 compdef gpg2=gpg
 
-
 # parallel make
 export NUMCPUS=`grep -c '^processor' /proc/cpuinfo`
 alias pmake='time nice make -j $NUMCPUS --load-average=$NUMCPUS'
@@ -100,10 +98,7 @@ alias pmake='time nice make -j $NUMCPUS --load-average=$NUMCPUS'
 export TERM=xterm-256color
 [ -n "$TMUX" ] && export TERM=screen-256color
 
-source /home/leyrer/.oh-my-zsh/themes/zsh-syntax-highlighting.theme/zsh-syntax-highlighting.zsh
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
 
 # https://twitter.com/citizen428/status/902433159018561536
 export FZF_DEFAULT_COMMAND='rg --files'
