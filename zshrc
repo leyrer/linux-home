@@ -54,7 +54,7 @@ BULLETTRAIN_PROMPT_ADD_NEWLINE=true
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git colored-man-pages command-not-found common-aliases copydir copyfile cp debian dircycle dirhistory dirpersist emoji-clock emoji gitfast gnu-util history-substring-search history iwhois man nmap rand-quote rsync ssh-agent sudo tmux web-search zsh-syntax-highlighting timewarrior)
+plugins=(git colored-man-pages command-not-found common-aliases copydir copyfile cp debian dircycle dirhistory dirpersist emoji-clock emoji gitfast gnu-util history-substring-search history iwhois man nmap rand-quote rsync ssh-agent sudo tmux web-search zsh-syntax-highlighting timewarrior pyenv)
 
 # User configuration
 export PATH="/home/leyrer/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
@@ -94,15 +94,24 @@ compdef gpg2=gpg
 export NUMCPUS=`grep -c '^processor' /proc/cpuinfo`
 alias pmake='time nice make -j $NUMCPUS --load-average=$NUMCPUS'
 
+# PYENV / Simple Python version management
+# https://github.com/pyenv/pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
+
+# Set TERM for with or without TMUX
 # http://www.economyofeffort.com/2014/07/04/zsh/
 export TERM=xterm-256color
 [ -n "$TMUX" ] && export TERM=screen-256color
 
+# FZF
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
 # https://twitter.com/citizen428/status/902433159018561536
 export FZF_DEFAULT_COMMAND='rg --files'
-# Solarized Dark
+# FZF Solarized Dark scheme
 export FZF_DEFAULT_OPTS=' --color dark,hl:33,hl+:37,fg+:235,bg+:136,fg+:254 --color info:254,prompt:37,spinner:108,pointer:235,marker:235'
 # https://github.com/junegunn/fzf/wiki/Color-schemes
 # Solarized Light
