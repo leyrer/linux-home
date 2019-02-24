@@ -96,9 +96,6 @@ compdef gpg2=gpg
 export NUMCPUS=`grep -c '^processor' /proc/cpuinfo`
 alias pmake='time nice make -j $NUMCPUS --load-average=$NUMCPUS'
 
-
-/home/leyrer/bin/prepDbus.bash 
-
 # http://www.economyofeffort.com/2014/07/04/zsh/
 export TERM=xterm-256color
 [ -n "$TMUX" ] && export TERM=screen-256color
