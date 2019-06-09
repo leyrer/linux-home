@@ -125,3 +125,9 @@ export FZF_DEFAULT_OPTS=' --color dark,hl:33,hl+:37,fg+:235,bg+:136,fg+:254 --co
 . ~/bin/z.sh
 
 
+
+PATH="/home/leyrer/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="/home/leyrer/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/home/leyrer/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/home/leyrer/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/home/leyrer/perl5"; export PERL_MM_OPT;
