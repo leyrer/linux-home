@@ -89,7 +89,7 @@ if has("win32")
 	let winhelpfile='windows.hlp'
 	map K :execute "!start winhlp32 -k <cword> " . winhelpfile <CR>
 else
-	set bdir=/home/leyer/tmp
+	set bdir=/home/leyrer/tmp
 	set dir=/home/leyrer/tmp
 	set backupdir=/home/leyrer/tmp
 	set nobackup
